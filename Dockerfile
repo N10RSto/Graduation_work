@@ -13,8 +13,12 @@ WORKDIR /app
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl default-mysql-client libjemalloc2 libvips && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    apt-get install --no-install-recommends -y \
+        curl \
+        libpq-dev \
+        libjemalloc2 \
+        libvips && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -65,5 +69,4 @@ COPY --from=build /app /app
 ENTRYPOINT ["/app/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
 CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
