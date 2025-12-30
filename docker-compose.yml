@@ -14,10 +14,11 @@ services:
       - db
 
   db:
-    image: mysql:8.0
+    image: postgres:15
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: app_development
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app_development
     volumes:
       - db-data:/var/lib/mysql
 

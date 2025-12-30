@@ -10,15 +10,17 @@
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8mb4
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USER") { "root" } %>
+  username: <%= ENV.fetch("DB_USER") { "postgres" } %>
   password: <%= ENV.fetch("DB_PASSWORD") { "password" } %>
   host: <%= ENV.fetch("DB_HOST") { "db" } %>
-
 development:
   <<: *default
+  username: root
+  password: password
+  host: db
   database: app_development
 
 # Warning: The database defined as "test" will be erased and

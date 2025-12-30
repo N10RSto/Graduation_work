@@ -1,0 +1,30 @@
+<div class="color-palette">
+  <button class="color-btn" data-r="255" data-g="255" data-b="255" style="background:#FFFFFF"></button>
+  <button class="color-btn" data-r="192" data-g="192" data-b="192" style="background:#C0C0C0"></button>
+  <button class="color-btn" data-r="128" data-g="128" data-b="128" style="background:#808080"></button>
+  <button class="color-btn" data-r="0" data-g="0" data-b="0" style="background:#000000"></button>
+  <button class="color-btn" data-r="255" data-g="0" data-b="0" style="background:#FF0000"></button>
+  <button class="color-btn" data-r="128" data-g="0" data-b="0" style="background:#800000"></button>
+  <button class="color-btn" data-r="255" data-g="255" data-b="0" style="background:#FFFF00"></button>
+  <button class="color-btn" data-r="128" data-g="128" data-b="0" style="background:#808000"></button>
+  <button class="color-btn" data-r="0" data-g="255" data-b="0" style="background:#00FF00"></button>
+  <button class="color-btn" data-r="0" data-g="128" data-b="0" style="background:#008000"></button>
+  <button class="color-btn" data-r="0" data-g="255" data-b="255" style="background:#00FFFF"></button>
+  <button class="color-btn" data-r="0" data-g="128" data-b="128" style="background:#008080"></button>
+  <button class="color-btn" data-r="0" data-g="0" data-b="255" style="background:#0000FF"></button>
+  <button class="color-btn" data-r="0" data-g="0" data-b="128" style="background:#000080"></button>
+  <button class="color-btn" data-r="255" data-g="0" data-b="255" style="background:#FF00FF"></button>
+  <button class="color-btn" data-r="128" data-g="0" data-b="128" style="background:#800080"></button>
+</div>
+
+<script>
+  document.querySelectorAll(".color-btn").forEach(button => {
+    button.addEventListener("click",() => {
+      const r = button.dataset.r;
+      const g = button.dataset.g;
+      const b = button.dataset.b;
+
+      setColor(r, g, b);
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-12">
+    <label class="form-label">R</label>
+    <input type="range" class="form-range" min="0" max="255" value="0" id="redRange">
+  </div>
+  <div class="col-12">
+    <label class="form-label">G</label>
+    <input type="range" class="form-range" min="0" max="255" value="0" id="greenRange">
+  </div>
+  <div class="col-12">
+    <label class="form-label">B</label>
+    <input type="range" class="form-range" min="0" max="255" value="0" id="blueRange">
+  </div>
+
+  <div class="col-12">
+    <div id="colorPreview" class="border rounded p-1 text-center">
+      rgb(0,0,0)
+    </div>
+  </div>
+</div>
+
+<script>
+  const red = document.getElementById("redRange");
+  const green = document.getElementById("greenRange");
+  const blue = document.getElementById("blueRange");
+  const preview = document.getElementById("colorPreview");
+
+  function setColor(r, g, b) {
+    const rgb =`rgb(${r}, ${g}, ${b})`;
+
+    red.value = r;
+    green.value = g;
+    blue.value = b;
+
+    preview.style.backgroundColor = rgb;
+    preview.textContent = rgb;
+  }
+
+  function updateColorFromRange() {
+    setColor(red.value, green.value, blue.value);
+  }
+
+  red.addEventListener("input",updateColorFromRange);
+  green.addEventListener("input",updateColorFromRange);
+  blue.addEventListener("input",updateColorFromRange);
+
+  updateColorFromRange();
+</script>
