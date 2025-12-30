@@ -31,3 +31,20 @@ header {
   margin-right: 25px;
   font-size: 24px;
 }
+
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(8, 64px);
+  gap: 8px;
+}
+
+.color-btn {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.color-btn.active {
+  border: 2px solid #000;
+}
