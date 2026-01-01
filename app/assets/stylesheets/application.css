@@ -48,3 +48,16 @@ header {
 .color-btn.active {
   border: 2px solid #000;
 }
+
+.pixel-canvas {
+  width: 320px;
+  height: 320px;
+  display: grid;
+  border: 1px solid #999;
+  gap: 1px;
+}
+
+.pixel {
+  background: white;
+  box-sizing: border-box;
+}

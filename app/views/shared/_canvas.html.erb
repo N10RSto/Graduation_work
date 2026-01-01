@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-12">
+    <div id="pixelCanvas" class="pixel-canvas"></div>
+  </div>
+</div>
+
+<script>
+  const CANVAS_SIZE = 500;
+  let gridSize = 16;
+  let currentColor = "rgb(0, 0, 0)";
+
+  function createCanvas() {
+    const canvas = document.getElementById("pixelCanvas");
+    const pixelSize = CANVAS_SIZE / gridSize;
+
+    canvas.style.gridTemplateColumns = `repeat(${gridSize}, ${pixelSize}px)`;
+    canvas.style.gridTemplateRows = `repeat(${gridSize}, ${pixelSize}px)`;
+
+    canvas.innerHTML = "";
+    for (let i = 0; i < gridSize * gridSize; i++) {
+      const pixel = document.createElement("div");
+      pixel.classList.add("pixel");
+
+      pixel.style.width = `${pixelSize}px`;
+      pixel.style.height = `${pixelSize}px`;
+
+      pixel.addEventListener("click", () => {
+        pixel.style.backgroundColor = currentColor;
+      });
+
+      canvas.appendChild(pixel);
+    }
+  }
+
+  createCanvas();
+</script>
