@@ -1,17 +1,44 @@
 <div class="row">
   <div class="col-12">
+    <div class="mt-1" id="snsIcons"></div>
     <select id="gridSelector">
-      <option value="8">8×8</option>
       <option value="16" selected>16×16</option>
-      <option value="24">24×24</option>
       <option value="32">32×32</option>
+      <option value="64">64×64</option>
+      <option value="128">128×128</option>
     </select>
   </div>
 </div>
 
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    renderSnsIcons(gridSize);
+  });
+
+  const snsByGridSize = {
+    16: ["twitter-x"],
+    32: ["twitter-x"],
+    64: ["twitter-x", "facebook"],
+    128: ["twitter-x", "facebook", "instagram"]
+  };
+
+  function renderSnsIcons(gridSize) {
+    const container = document.getElementById("snsIcons");
+    container.innerHTML = "";
+
+    const icons = snsByGridSize[gridSize];
+    if(!icons) return;
+
+    icons.forEach(name => {
+      const icon = document.createElement("i");
+      icon.className = `bi bi-${name} fs-3 me-3`;
+      container.appendChild(icon);
+    });
+  }
+
   document.getElementById("gridSelector").addEventListener("change", (e) => {
     gridSize = Number(e.target.value);
     createCanvas();
+    renderSnsIcons(gridSize);
   });
 </script>
