@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "main/index"
   root "main#index"
-  post "images", to: "images#create"
+  get "/image/download", to: "images#download"
 
   get "up" => "rails/health#show", as: :rails_health_check
 

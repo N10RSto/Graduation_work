@@ -1,22 +1,12 @@
 require "base64"
 
 class ImagesController < ApplicationController
-  def create
-    data = params[:image]
-
-    header, encoded = data.split(",")
-    decoded = Base64.decode64(encoded)
-
-    image = MiniMagick::Image.read(decoded)
-    image.format "png"
-
-    path = Rails.root.json("public", "pixel.png")
-    image.write(path)
-
-    render json: { success: true }
+  def download
+    path = Rails.root.join("public", "pixel.png")
+    if File.exist?(path)
+      send_file path, type: "image/png", disposition: "attachment"
+    else
+      render plain: "ファイルが存在しません", status: 404
+    end
   end
-
-  send_file Rails.root.join("public", "pixel.png"),
-            type: "image/png",
-            disposition: "attachment"
 end
