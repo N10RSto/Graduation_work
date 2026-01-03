@@ -3,10 +3,32 @@
     <div class="col-lg-6">
       <%= render 'shared/canvas' %>
     </div>
-    <div class="col-lg-6 text-end">
+    <div class="col-lg-6 mt-5 text-end">
       <%= render 'shared/color_button' %>
       <%= render 'shared/create_color' %>
       <%= render 'shared/grid_count' %>
+      <div class="row mt-2">
+        <div class="col-6">
+          <button id="circleBtn" class="btn btn-outline-primary">
+            プレビュー表示
+          </button>
+        </div>
+        <div class="col-6 text-end">
+          <button id="saveBtn" class="btn btn-primary">保存</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  const circleBtn = document.getElementById("circleBtn");
+  const circlePreview = document.getElementById("circlePreview");
+
+  let isCirclePreview = false;
+
+  circleBtn.addEventListener("click", () => {
+    isCirclePreview = !isCirclePreview;
+    circlePreview.style.display = isCirclePreview ? "block" : "none";
+  });
+</script>
