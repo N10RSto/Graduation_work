@@ -16,7 +16,7 @@ class ImagesController < ApplicationController
     render json: { success: true }
   end
 
-  send_file Rails.root.json("public", "pixel.png"),
+  send_file Rails.root.join("public", "pixel.png"),
             type: "image/png",
             disposition: "attachment"
 end
