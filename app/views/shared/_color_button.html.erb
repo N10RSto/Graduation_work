@@ -18,13 +18,15 @@
 </div>
 
 <script>
-  document.querySelectorAll(".color-btn").forEach(button => {
-    button.addEventListener("click",() => {
-      const r = button.dataset.r;
-      const g = button.dataset.g;
-      const b = button.dataset.b;
+  document.addEventListener("turbo:load", () => {
+    document.querySelectorAll(".color-btn").forEach(button => {
+      button.addEventListener("click",() => {
+        const r = button.dataset.r;
+        const g = button.dataset.g;
+        const b = button.dataset.b;
 
-      setColor(r, g, b);
+        setColor(r, g, b);
+      });
     });
   });
 </script>

@@ -2,16 +2,46 @@
  *= require_tree .
  *= require_self
  */
-body {
-  background-color: #464646;
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.app-title {
+  font-family: 'DotGothic16', sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  padding-left: 20px;
+  text-shadow:
+    1px 0 0 currentColor,
+    0 1px 0 currentColor;
+}
+
+.center-wrapper {
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh;
+  background-image: url("/images/background.png");
+  background-size: cover;
+  background-position: center; 
+  justify-content: center;
+  align-items: center;
+}
+
+.main-wrapper {
+  background-color: rgba(92, 64, 51, 0.6);
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  min-height: 100vh;
 }
 
 header {
-  background-color: #555555;
+  background-color: #464646;
 }
 
 .header-nav {
-  color: #FFFFFF;
   margin-right: 100px;
 }
 
@@ -58,6 +88,7 @@ header {
   width: 500px;
   height: 500px;
   overflow: hidden;
+  background: #999;
 }
 
 .circle-preview {
@@ -91,4 +122,36 @@ header {
     transparent 70%,
     black 71%
   );
+}
+
+#popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+#popup {
+  background: #FFF;
+  padding: 20px 30px;
+  border-radius: 50px;
+  width: 800px;
+  height: 320px;
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 30px;
 }

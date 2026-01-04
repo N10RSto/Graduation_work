@@ -1,4 +1,4 @@
-<div class="row mt-3">
+<div class="row">
   <input type="file" id="imageInput" accept="image/*">
   <canvas id="hiddenCanvas" style="display:none;"></canvas>
   <div class="col-12">
@@ -13,44 +13,10 @@
   const CANVAS_SIZE = 500;
   let gridSize = 16;
   let currentColor = "rgb(0, 0, 0)";
-  const imageInput = document.getElementById("imageInput");
-  const hiddenCanvas = document.getElementById("hiddenCanvas");
-  const ctx = hiddenCanvas.getContext("2d");
-
-  imageInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
-
-    img.onload = () => {
-      drawImageToPixelCanvas(img);
-    };
-  });
-
-  function drawImageToPixelCanvas(img) {
-    hiddenCanvas.width = gridSize;
-    hiddenCanvas.height = gridSize;
-
-    ctx.clearRect(0, 0, gridSize, gridSize);
-    ctx.drawImage(img, 0, 0, gridSize, gridSize);
-
-    const imageData = ctx.getImageData(0, 0, gridSize, gridSize).data;
-    const pixels = document.querySelectorAll("#pixelCanvas .pixel");
-
-    pixels.forEach((pixel, index) => {
-      const r = imageData[index * 4];
-      const g = imageData[index * 4 + 1];
-      const b = imageData[index * 4 + 2];
-      const a = imageData[index * 4 + 3] / 255;
-
-      pixel.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
-    });
-  }
 
   function createCanvas() {
     const canvas = document.getElementById("pixelCanvas");
+    if (!canvas) return;
 
     canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
     canvas.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
@@ -66,8 +32,50 @@
 
       canvas.appendChild(pixel);
     }
-    imageInput.value = "";
+    const imageInput = document.getElementById("imageInput");
+    if (imageInput) imageInput.value = "";
   }
 
-  createCanvas();
+  document.addEventListener("turbo:load", () => {
+    const imageInput = document.getElementById("imageInput");
+    const hiddenCanvas = document.getElementById("hiddenCanvas");
+
+    if (!imageInput || !hiddenCanvas) return;
+
+    const ctx = hiddenCanvas.getContext("2d");
+
+    imageInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      img.onload = () => {
+      drawImageToPixelCanvas(img);
+      };
+    });
+
+    function drawImageToPixelCanvas(img) {
+      hiddenCanvas.width = gridSize;
+      hiddenCanvas.height = gridSize;
+
+      ctx.clearRect(0, 0, gridSize, gridSize);
+      ctx.drawImage(img, 0, 0, gridSize, gridSize);
+
+      const imageData = ctx.getImageData(0, 0, gridSize, gridSize).data;
+      const pixels = document.querySelectorAll("#pixelCanvas .pixel");
+
+      pixels.forEach((pixel, index) => {
+        const r = imageData[index * 4];
+        const g = imageData[index * 4 + 1];
+        const b = imageData[index * 4 + 2];
+        const a = imageData[index * 4 + 3] / 255;
+
+        pixel.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
+      });
+    }
+
+    createCanvas();
+  });
 </script>

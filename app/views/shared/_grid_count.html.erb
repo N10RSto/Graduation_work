@@ -2,8 +2,8 @@
   <div class="col-12">
     <div class="mt-1" id="snsIcons"></div>
     <select id="gridSelector">
-      <option value="16" selected>16×16</option>
-      <option value="32">32×32</option>
+      <option value="32" selected>32×32</option>
+      <option value="48">48×48</option>
       <option value="64">64×64</option>
       <option value="128">128×128</option>
     </select>
@@ -11,15 +11,11 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    renderSnsIcons(gridSize);
-  });
-
   const snsByGridSize = {
-    16: ["line", "twitter-x"],
+    16: ["line", "twitter-x", "discord", "github"],
     32: ["twitter-x"],
-    64: ["twitter-x", "facebook"],
-    128: ["twitter-x", "facebook", "instagram", "discord", "github"]
+    64: ["twitter-x", "facebook", "tiktok", "discord", "github"],
+    128: ["instagram"]
   };
 
   function renderSnsIcons(gridSize) {
@@ -36,9 +32,14 @@
     });
   }
 
-  document.getElementById("gridSelector").addEventListener("change", (e) => {
-    gridSize = Number(e.target.value);
-    createCanvas();
+  document.addEventListener("turbo:load", () => {
     renderSnsIcons(gridSize);
+    const selector = document.getElementById("gridSelector");
+    if (!selector) return;
+    selector.addEventListener("change", (e) => {
+      gridSize = Number(e.target.value);
+      createCanvas();
+      renderSnsIcons(gridSize);
+    });
   });
 </script>

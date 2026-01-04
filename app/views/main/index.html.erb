@@ -1,20 +1,35 @@
-<div class="container pt-3">
-  <div class="row">
-    <div class="col-lg-6">
-      <%= render 'shared/canvas' %>
-    </div>
-    <div class="col-lg-6 mt-5 text-end">
-      <%= render 'shared/color_button' %>
-      <%= render 'shared/create_color' %>
-      <%= render 'shared/grid_count' %>
-      <div class="row mt-2">
-        <div class="col-6">
-          <button id="circleBtn" class="btn btn-outline-primary">
-            プレビュー表示
-          </button>
+<div class="main-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <%= render 'shared/canvas' %>
+      </div>
+      <div class="col-lg-6 text-end">
+        <%= render 'shared/color_button' %>
+        <%= render 'shared/create_color' %>
+        <%= render 'shared/grid_count' %>
+        <div class="row">
+          <div class="col-12">
+            <button id="circleBtn" class="btn btn-outline-primary">
+              プレビュー表示
+            </button>
+            <button id="saveBtn" class="btn btn-primary">保存</button>
+          </div>
         </div>
-        <div class="col-6 text-end">
-          <button id="saveBtn" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+    <div id="popup-overlay">
+      <div id="popup">
+        <h3>保存について</h3>
+        <p>
+          ドット絵を保存します<br>
+          「切り取り保存」を選択した場合は、プレビュー表示と同形に切り取ってから保存を行います<br>
+          保存後は「my_pixel_art.」というPNGファイル名で保存されます
+        </p>
+        <div class="popup-buttons">
+          <button id="confirmSave" class="btn-danger">保存</button>
+          <button id="clipSave" class="btn-danger">切り取り保存</button>
+          <button id="closePopup" class="btu btn-secondary">キャンセル</button>
         </div>
       </div>
     </div>
@@ -22,13 +37,17 @@
 </div>
 
 <script>
-  const circleBtn = document.getElementById("circleBtn");
-  const circlePreview = document.getElementById("circlePreview");
+  document.addEventListener("turbo:load", () => {
+    const circleBtn = document.getElementById("circleBtn");
+    const circlePreview = document.getElementById("circlePreview");
 
-  let isCirclePreview = false;
+    if(!circleBtn || !circlePreview) return;
 
-  circleBtn.addEventListener("click", () => {
-    isCirclePreview = !isCirclePreview;
-    circlePreview.style.display = isCirclePreview ? "block" : "none";
-  });
+    let isCirclePreview = false;
+
+    circleBtn.addEventListener("click", () => {
+      isCirclePreview = !isCirclePreview;
+      circlePreview.style.display = isCirclePreview ? "block" : "none";
+    });
+});
 </script>

@@ -20,12 +20,14 @@
 </div>
 
 <script>
-  const red = document.getElementById("redRange");
-  const green = document.getElementById("greenRange");
-  const blue = document.getElementById("blueRange");
-  const preview = document.getElementById("colorPreview");
-
   function setColor(r, g, b) {
+    const red = document.getElementById("redRange");
+    const green = document.getElementById("greenRange");
+    const blue = document.getElementById("blueRange");
+    const preview = document.getElementById("colorPreview");
+
+    if (!red || !green || !blue || !preview) return;
+
     const rgb =`rgb(${r}, ${g}, ${b})`;
 
     red.value = r;
@@ -38,13 +40,22 @@
     currentColor = rgb;
   }
 
-  function updateColorFromRange() {
-    setColor(red.value, green.value, blue.value);
-  }
+  document.addEventListener("turbo:load", () => {
 
-  red.addEventListener("input",updateColorFromRange);
-  green.addEventListener("input",updateColorFromRange);
-  blue.addEventListener("input",updateColorFromRange);
+    const red = document.getElementById("redRange");
+    const green = document.getElementById("greenRange");
+    const blue = document.getElementById("blueRange");
 
-  updateColorFromRange();
+    if (!red || !green || !blue) return;
+
+    function updateColorFromRange() {
+      setColor(red.value, green.value, blue.value);
+    }
+
+    red.addEventListener("input",updateColorFromRange);
+    green.addEventListener("input",updateColorFromRange);
+    blue.addEventListener("input",updateColorFromRange);
+
+    updateColorFromRange();
+  });
 </script>
