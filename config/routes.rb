@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get "main/index"
   root "main#index"
   get "/image/download", to: "images#download"
-  get "how_to", to: "main#how_to"
 
   get "up" => "rails/health#show", as: :rails_health_check
 

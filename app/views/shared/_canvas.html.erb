@@ -1,7 +1,10 @@
 <div class="row">
-  <input type="file" id="imageInput" accept="image/*">
+  <div>
+    <input type="file" id="imageInput" accept="image/*">
+    <label for="imageInput" class="custom-file-btn"></label>
+  </div>
   <canvas id="hiddenCanvas" style="display:none;"></canvas>
-  <div class="col-12">
+  <div class="col-12 d-flex  justify-content-center">
     <div class="canvas-wrapper">
       <div id="pixelCanvas" class="pixel-canvas"></div>
       <div id="circlePreview" class="circle-preview"></div>
@@ -11,7 +14,7 @@
 
 <script>
   const CANVAS_SIZE = 500;
-  let gridSize = 16;
+  let gridSize = 32;
   let currentColor = "rgb(0, 0, 0)";
 
   function createCanvas() {
@@ -22,12 +25,23 @@
     canvas.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
     canvas.innerHTML = "";
+
+    let isMouseDown = false;
+    document.addEventListener("mousedown", () => isMouseDown = true);
+    document.addEventListener("mouseup", () => isMouseDown = false);
+
     for (let i = 0; i < gridSize * gridSize; i++) {
       const pixel = document.createElement("div");
       pixel.classList.add("pixel");
 
-      pixel.addEventListener("click", () => {
+      pixel.addEventListener("mousedown", () => {
         pixel.style.backgroundColor = currentColor;
+      });
+
+      pixel.addEventListener("mouseover", () => {
+        if (isMouseDown) {
+          pixel.style.backgroundColor = currentColor;
+        }
       });
 
       canvas.appendChild(pixel);

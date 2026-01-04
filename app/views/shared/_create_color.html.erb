@@ -1,14 +1,12 @@
 <div class="row">
   <div class="col-12">
-    <label class="form-label">R</label>
+    <label class="form-label"></label>
     <input type="range" class="form-range" min="0" max="255" value="0" id="redRange">
-  </div>
-  <div class="col-12">
-    <label class="form-label">G</label>
+
+    <label class="form-label"></label>
     <input type="range" class="form-range" min="0" max="255" value="0" id="greenRange">
-  </div>
-  <div class="col-12">
-    <label class="form-label">B</label>
+
+    <label class="form-label"></label>
     <input type="range" class="form-range" min="0" max="255" value="0" id="blueRange">
   </div>
 
@@ -35,7 +33,14 @@
     blue.value = b;
 
     preview.style.backgroundColor = rgb;
-    preview.textContent = rgb;
+    preview.textContent = `R:${r} G:${g} B:${b}`;
+
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    preview.style.color = brightness > 128 ? 'black' : 'white'; 
+
+    red.style.background = `linear-gradient(to right, rgb(255,0,0), rgb(255,255,255))`;
+    green.style.background = `linear-gradient(to right, rgb(0,255,0), rgb(255,255,255))`;
+    blue.style.background = `linear-gradient(to right, rgb(0,0,255), rgb(255,255,255))`;
 
     currentColor = rgb;
   }

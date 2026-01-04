@@ -9,6 +9,7 @@ html, body {
 
 .app-title {
   font-family: 'DotGothic16', sans-serif;
+  color: #FFF;
   font-size: 30px;
   letter-spacing: 0.14em;
   line-height: 1.4;
@@ -21,7 +22,7 @@ html, body {
 .center-wrapper {
   display: flex;
   flex-direction: column; 
-  min-height: 100vh;
+  min-height: 93.6vh;
   background-image: url("/images/background.png");
   background-size: cover;
   background-position: center; 
@@ -34,7 +35,7 @@ html, body {
   display: flex;
   justify-content: center; 
   align-items: center;
-  min-height: 100vh;
+  min-height: 93.6vh;
 }
 
 header {
@@ -62,10 +63,27 @@ header {
   height: 48px;
   border: 2px solid #ccc;
   cursor: pointer;
+  border-radius: 30%;
 }
 
 .color-btn.active {
   border: 2px solid #000;
+}
+
+#colorPreview {
+  text-shadow: 0.5px 0.5px 1px black;
+}
+
+.sns_icon {
+  background: #F5F5F5;
+  margin-bottom: 1px;
+  min-width: 42px;
+  padding-left: 15px;
+  border-radius: 20px;
+}
+
+#gridSelector {
+  min-height: 42px;
 }
 
 .pixel-canvas {
@@ -154,4 +172,30 @@ header {
   justify-content: flex-start;
   gap: 12px;
   margin-top: 30px;
+}
+
+.btn-primary {
+  margin: 10px;
+  color: #464646;
+  background-color: #F5F5F5;
+  border-color: #464646;
+}
+
+#imageInput {
+  display: none;
+}
+
+.custom-file-btn {
+  display: inline-block;
+  padding: 32px 32px;
+  background-color: #5c4033;
+  background-image: url("/images/folder.png");
+  border-radius: 30px;
+  border: 3px solid #FFF;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.custom-file-btn:hover {
+  background-color: #7a5845;
 }
