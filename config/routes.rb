@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
+  get "users/new"
+  get "users/create"
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
   get "main/index"
   root "main#index"
   get "/image/download", to: "images#download"
+  get "/signup", to: "users#new"
+  post "/signup", to: "users#create"
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
   get "up" => "rails/health#show", as: :rails_health_check
 

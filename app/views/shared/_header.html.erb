@@ -1,7 +1,28 @@
 <header>
   <nav class="navbar navbar-expand-lg">
-    <div class="d-flex w-100" id='Menu'>
+    <div class="d-flex w-100 align-items-center justify-content-between" id='Menu'>
       <span class="app-title">Icot-Studio</span>
+
+      <div class="auth-area">
+        <% if logged_in? %>
+          <span class="me-2">
+            <%= current_user.name %>
+          </span>
+
+          <%= button_to "ログアウト",
+              logout_path,
+              method: :delete,
+              class: "btn btn-outline-light btn-sm",
+              form: { class: "d-inline" } %>
+        <% else %>
+          <%= link_to "新規登録",
+              signup_path,
+              class: "btn btn-outline-light btn-sm me-2" %>
+          <%= link_to "ログイン",
+              login_path,
+              class: "btn btn-outline-light btn-sm" %>
+        <% end %>
+      </div>
     </div>
   </nav>
 </header>
