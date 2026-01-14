@@ -1,7 +1,23 @@
 <div class="row">
   <div>
     <input type="file" id="imageInput" accept="image/*">
-    <label for="imageInput" class="custom-file-btn"></label>
+    <label for="imageInput" class="custom-file-btn" id="imageSelectLabel"></label>
+  </div>
+  <div id="Filter-popup-overlay" class="popup-overlay">
+    <div id="popup">
+      <h3>画像選択について</h3>
+      <p>
+        「画像を選択」から画像を選んでください<br>
+        以下のフィルターを選択した状態で画像を選択した場合、キャンバスへの投影時に補正をかけます<br>
+      </p>
+      <div class="popup-buttons">
+        <button id="selectImage" class="btn-primary">画像を選択</button>
+        <button class="filter-btn" data-filter="pastel">パステルカラー</button>
+        <button class="filter-btn" data-filter="warm">暖色系</button>
+        <button class="filter-btn" data-filter="cool">寒色系</button>
+        <button id="Filter-closePopup" class="btn-secondary">キャンセル</button>
+      </div>
+    </div>
   </div>
   <canvas id="hiddenCanvas" style="display:none;"></canvas>
   <div class="col-12 d-flex  justify-content-center">
@@ -13,6 +29,7 @@
 </div>
 
 <script>
+  let selectedFilter = null;
   const CANVAS_SIZE = 500;
   let gridSize = 32;
   let currentColor = "rgb(0, 0, 0)";
@@ -53,6 +70,38 @@
   document.addEventListener("turbo:load", () => {
     const imageInput = document.getElementById("imageInput");
     const hiddenCanvas = document.getElementById("hiddenCanvas");
+    const imageSelectLabel = document.getElementById("imageSelectLabel");
+    const popupOverlay = document.getElementById("Filter-popup-overlay");
+    const closePopup = document.getElementById("Filter-closePopup");
+    const selectImageBtn = document.getElementById("selectImage");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    imageSelectLabel.addEventListener("click", (e) => {
+      e.preventDefault();
+      popupOverlay.style.display = "flex";
+    });
+
+    closePopup.addEventListener("click", () => {
+      popupOverlay.style.display = "none";
+    });
+
+    selectImageBtn.addEventListener("click", () => {
+      popupOverlay.style.display = "none";
+      imageInput.click();
+  });
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("active")) {
+          btn.classList.remove("active");
+          selectedFilter = null;
+        } else {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedFilter = btn.dataset.filter;
+        }
+      });
+    });
 
     if (!imageInput || !hiddenCanvas) return;
 
@@ -70,6 +119,33 @@
       };
     });
 
+    function applyFilter(r, g, b) {
+      switch (selectedFilter) {
+        case "pastel":
+          return [
+            Math.min(255, r + (255 - r) * 0.4),
+            Math.min(255, g + (255 - g) * 0.4),
+            Math.min(255, b + (255 - b) * 0.4)
+          ];
+
+          case "warm":
+            return [
+              Math.min(255, r + 30),
+              g,
+              Math.max(0, b - 20)
+            ];
+
+            case "cool":
+              return [
+                Math.max(0, r - 20),
+                g,
+                Math.min(255, b + 30)
+              ];
+
+              default: return [r, g, b];
+      }
+    }
+
     function drawImageToPixelCanvas(img) {
       hiddenCanvas.width = gridSize;
       hiddenCanvas.height = gridSize;
@@ -81,10 +157,12 @@
       const pixels = document.querySelectorAll("#pixelCanvas .pixel");
 
       pixels.forEach((pixel, index) => {
-        const r = imageData[index * 4];
-        const g = imageData[index * 4 + 1];
-        const b = imageData[index * 4 + 2];
+        let r = imageData[index * 4];
+        let g = imageData[index * 4 + 1];
+        let b = imageData[index * 4 + 2];
         const a = imageData[index * 4 + 3] / 255;
+
+        [r, g, b] = applyFilter(r, g, b);
 
         pixel.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
       });

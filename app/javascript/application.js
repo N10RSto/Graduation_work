@@ -33,8 +33,8 @@ function exportPixelCanvas({ clipCircle = false } = {}) {
 
 document.addEventListener("turbo:load", () => {
   const saveBtn = document.getElementById("saveBtn");
-  const popup = document.getElementById("popup-overlay");
-  const closeBtn = document.getElementById("closePopup");
+  const popup = document.getElementById("Save-popup-overlay");
+  const closeBtn = document.getElementById("Save-closePopup");
   const confirmSaveBtn = document.getElementById("confirmSave");
   const clipSaveBtn = document.getElementById("clipSave");
 
