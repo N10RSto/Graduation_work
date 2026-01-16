@@ -1,0 +1,42 @@
+<div class="container my-5">
+  <h2 class="mb-4">マイページ</h2>
+
+  <div class="card mb-4 p-3">
+    <h5>ユーザー情報</h5>
+    <p>ユーザー名: <%= @user.name %></p>
+    <p>登録日: <%= l @user.created_at.to_date %></p>
+  </div>
+
+  <div class="card p-3">
+    <h5>作成したアイコン</h5>
+
+    <% if @icons.any? %>
+      <div class="row">
+        <% @icons.each do |icon| %>
+          <div class="col-6 col-md-4 mb-3">
+            <div class="icon-card">
+              <%= image_tag icon.image.variant(resize_to_limit: [300, 300]),
+                  class: "img-fluid" %>
+              <small class="text-muted mb-2">
+                保存日: <%= l icon.created_at.to_date %>
+              </small>
+              <div class="mt-auto d-flex justify-content-between">
+                <%= button_to "削除",
+                  icon_path(icon),
+                  method: :delete,
+                  data: { turbo_confirm: "削除しますか？" },
+                  class: "btn btn-sm btn-outline-danger" %>
+
+                <%= link_to "再編集",
+                    icon_path(icon),
+                    class: "btn btn-sm btn-outline-primary" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-muted">まだアイコンを作成していません</p>
+    <% end %>
+  </div>
+</div>

@@ -214,3 +214,15 @@ header {
 .custom-file-btn:hover {
   background-color: #7a5845;
 }
+
+.icon-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.icon-card img {
+  width: 70px;
+  height: auto;
+}

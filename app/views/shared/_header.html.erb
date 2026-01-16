@@ -9,6 +9,10 @@
             <%= current_user.name %>
           </span>
 
+          <%= link_to "マイページ",
+              mypage_path,
+              class: "btn btn-outline-light btn-sm me-2" %>
+
           <%= button_to "ログアウト",
               logout_path,
               method: :delete,

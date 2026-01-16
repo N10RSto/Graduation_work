@@ -4,6 +4,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem "mini_magick"
 
+gem 'activerecord-session_store'
+
 gem 'image_processing', '~> 1.12'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.3"

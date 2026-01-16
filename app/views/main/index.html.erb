@@ -20,9 +20,10 @@
     </div>
     <div id="Save-popup-overlay" class="popup-overlay">
       <div id="popup">
-        <h3>保存について</h3>
+        <h3>ダウンロードについて</h3>
         <p>
-          ドット絵を保存します<br>
+          マイページへの保存を行いました<br>
+          ドット絵をダウンロードします<br>
           「切り取り保存」を選択した場合は、プレビュー表示と同形に切り取ってから保存を行います<br>
           保存後は「my_pixel_art.」というPNGファイル名で保存されます
         </p>
@@ -35,6 +36,17 @@
     </div>
   </div>
 </div>
+
+<% if params[:edit_icon_id] %>
+<% icon = current_user.icons.find(params[:edit_icon_id]) %>
+<script>
+  window.editIconData = {
+    gridSize: <%= icon.grid_size %>,
+    pixels: <%= raw icon.pixels.to_json %>
+  };
+</script>
+<% session.delete(:edit_icon_data) %>
+<% end %>
 
 <script>
   document.addEventListener("turbo:load", () => {

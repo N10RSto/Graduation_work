@@ -14,7 +14,7 @@
 </div>
 
 <script>
-  const snsByGridSize = {
+  var snsByGridSize = {
     32: ["line", "twitter-x", "discord", "github"],
     48: ["twitter-x"],
     64: ["twitter-x", "facebook", "tiktok", "discord", "github"],
@@ -23,6 +23,8 @@
 
   function renderSnsIcons(gridSize) {
     const container = document.getElementById("snsIcons");
+    if (!container) return; 
+
     container.innerHTML = "";
 
     const icons = snsByGridSize[gridSize];

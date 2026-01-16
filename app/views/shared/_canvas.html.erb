@@ -29,12 +29,14 @@
 </div>
 
 <script>
-  let selectedFilter = null;
-  const CANVAS_SIZE = 500;
-  let gridSize = 32;
-  let currentColor = "rgb(0, 0, 0)";
+  var selectedFilter = null;
+  var CANVAS_SIZE = CANVAS_SIZE || 500;
+  var gridSize = 32;
+  var currentColor = "rgb(0, 0, 0)";
 
-  function createCanvas() {
+  function createCanvas(size = gridSize) {
+    gridSize = size;
+
     const canvas = document.getElementById("pixelCanvas");
     if (!canvas) return;
 
@@ -68,6 +70,7 @@
   }
 
   document.addEventListener("turbo:load", () => {
+    selectedFilter = null;
     const imageInput = document.getElementById("imageInput");
     const hiddenCanvas = document.getElementById("hiddenCanvas");
     const imageSelectLabel = document.getElementById("imageSelectLabel");
@@ -75,6 +78,8 @@
     const closePopup = document.getElementById("Filter-closePopup");
     const selectImageBtn = document.getElementById("selectImage");
     const filterButtons = document.querySelectorAll(".filter-btn");
+
+    if (!imageInput || !hiddenCanvas) return;
 
     imageSelectLabel.addEventListener("click", (e) => {
       e.preventDefault();
@@ -88,7 +93,7 @@
     selectImageBtn.addEventListener("click", () => {
       popupOverlay.style.display = "none";
       imageInput.click();
-  });
+    });
 
     filterButtons.forEach(btn => {
       btn.addEventListener("click", () => {
@@ -102,8 +107,6 @@
         }
       });
     });
-
-    if (!imageInput || !hiddenCanvas) return;
 
     const ctx = hiddenCanvas.getContext("2d");
 
@@ -169,5 +172,17 @@
     }
 
     createCanvas();
+
+    if (window.editIconData) {
+      const { gridSize: saveGridSize, pixels } = window.editIconData;
+
+      createCanvas(saveGridSize);
+
+      const pixelEls = document.querySelectorAll("#pixelCanvas .pixel");
+
+      pixelEls.forEach((pixel, index) => {
+        pixel.style.backgroundColor = pixels[index];
+      });
+    }
   });
 </script>

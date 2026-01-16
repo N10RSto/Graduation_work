@@ -15,7 +15,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-logged-in="<%= logged_in? %>">
     <%= render 'shared/header' %>
     <div class="center-wrapper">
       <%= yield %>

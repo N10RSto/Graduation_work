@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/image/download", to: "images#download"
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
+  get "/mypage", to: "users#mypage"
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
@@ -17,4 +18,6 @@ Rails.application.routes.draw do
 
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+
+  resources :icons, only: [:create, :destroy, :show]
 end

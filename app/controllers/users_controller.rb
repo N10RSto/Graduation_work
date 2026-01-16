@@ -14,6 +14,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def mypage
+    @user = current_user
+    @icons = current_user.icons.order(created_at: :desc)
+  end
+
   private
 
   def user_params

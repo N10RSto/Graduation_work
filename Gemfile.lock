@@ -56,6 +56,12 @@ GEM
       activemodel (= 7.2.3)
       activesupport (= 7.2.3)
       timeout (>= 0.4.0)
+    activerecord-session_store (2.2.0)
+      actionpack (>= 7.0)
+      activerecord (>= 7.0)
+      cgi (>= 0.3.6)
+      rack (>= 2.0.8, < 4)
+      railties (>= 7.0)
     activestorage (7.2.3)
       actionpack (= 7.2.3)
       activejob (= 7.2.3)
@@ -305,6 +311,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-session_store
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
