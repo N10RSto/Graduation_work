@@ -226,3 +226,34 @@ header {
   width: 70px;
   height: auto;
 }
+
+footer {
+  background-color: #464646;
+  padding: 3px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.policy-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  line-height: 1.6;
+}
+
+.terms-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 24px;
+
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  line-height: 1.6;
+}

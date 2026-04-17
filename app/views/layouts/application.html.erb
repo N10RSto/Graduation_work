@@ -21,4 +21,18 @@
       <%= yield %>
     </div>
   </body>
+
+  <footer>
+    <% if current_page?("/terms") %>
+      <%= link_to "戻る", root_path, class: "btn btn-outline-light btn-sm me-2" %>
+    <% else %>
+      <%= link_to "利用規約", "/terms", class: "btn btn-outline-light btn-sm me-2" %>
+    <% end %>
+
+    <% if current_page?("/privacy") %>
+      <%= link_to "戻る", root_path, class: "btn btn-outline-light btn-sm me-2" %>
+    <% else %>
+      <%= link_to "プライバシーポリシー", "/privacy", class: "btn btn-outline-light btn-sm me-2" %>
+    <% end %>
+  </footer>
 </html>
